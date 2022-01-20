@@ -31,14 +31,14 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://upload.wikimedia.org/wikipedia/commons/2/2b/Gold.svg">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">(Au)dio (Au)gmentation = `auau`</h3>
+  <h3 align="center">(Au)dio (Au)gmentation = auau</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    It's all a work in progress since 2022-01-20
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />

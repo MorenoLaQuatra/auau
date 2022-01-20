@@ -31,8 +31,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://upload.wikimedia.org/wikipedia/commons/2/2b/Gold.svg">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="#">
+    <img src="resources/auau_logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">(Au)dio (Au)gmentation = auau</h3>

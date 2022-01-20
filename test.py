@@ -6,7 +6,7 @@ import librosa
 au = Augmenter()
 loader = Loader()
 
-signal, sr = loader.load_file("test_audio.wav")
+signal, sr = loader.load_file("resources/test_audio.wav")
 
 # White noise
 noise_factor = 0.25

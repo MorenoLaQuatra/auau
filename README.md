@@ -34,8 +34,6 @@
   <p align="center">
     It's all a work in progress since 2022-01-20
     <br />
-    <a href="https://github.com/MorenoLaQuatra/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
   </p>
 </div>
 
@@ -163,8 +161,6 @@ Project Link: [https://github.com/MorenoLaQuatra/auau](https://github.com/Moreno
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-
-Readme has been generated following the patterns provided by https://github.com/othneildrew/Best-README-Template.
 
 * [Valerio Velardo](https://github.com/musikalkemist) - This library is mainly inspired by Valerio's work!
 * [README template](https://github.com/othneildrew/Best-README-Template)

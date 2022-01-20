@@ -78,11 +78,11 @@ TODO!
 
 ### Built With
 
-This library is built on top of the following open-source projects;
+This library is built on top of the following open-source projects:
 
-* [librosa](https://nextjs.org/)
-* [soundfile](https://reactjs.org/)
-* [numpy](https://vuejs.org/)
+* [librosa](https://librosa.org/doc/latest/index.html)
+* [soundfile](https://pysoundfile.readthedocs.io/en/latest/)
+* [numpy](https://numpy.org/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -164,5 +164,6 @@ Project Link: [https://github.com/MorenoLaQuatra/auau](https://github.com/Moreno
 
 * [Valerio Velardo](https://github.com/musikalkemist) - This library is mainly inspired by Valerio's work!
 * [README template](https://github.com/othneildrew/Best-README-Template)
+* [Logo image](https://commons.wikimedia.org/wiki/File:Gold.svg)
 
 <p align="right">(<a href="#top">back to top</a>)</p>

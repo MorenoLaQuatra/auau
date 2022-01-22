@@ -113,7 +113,7 @@ _Install library in one command_
 
 1. Execute the following on your preferred environment
    ```sh
-   pip install git+ https://github.com/MorenoLaQuatra/auau.git
+   pip install git+https://github.com/MorenoLaQuatra/auau.git
    ```
 2. That's it!
 

@@ -32,7 +32,7 @@ augmented_signal = au.invert_polarity(signal)
 loader.save_file(f"outputs/test_audio_invert_polarity.wav", augmented_signal, sr)
 
 # External noise
-noise_signal, noise_sr = librosa.load("noise/1.wav")
+noise_signal, noise_sr = librosa.load("noise/7383-3-0-0.wav")
 au.resample(noise_signal, source_sr = noise_sr, target_sr = sr)
 augmented_signal = au.add_noise(signal, noise_signal, noise_factor=0.25)
 loader.save_file(f"outputs/test_noise.wav", augmented_signal, sr)
@@ -41,11 +41,11 @@ loader.save_file(f"outputs/test_noise.wav", augmented_signal, sr)
 list_noise_signals = []
 list_noise_factors = []
 
-noise_signal, noise_sr = librosa.load("noise/1.wav")
+noise_signal, noise_sr = librosa.load("noise/7383-3-0-1.wav")
 list_noise_signals.append(librosa.resample(noise_signal, noise_sr, sr))
 list_noise_factors.append(0.1)
 
-noise_signal, noise_sr = librosa.load("noise/2.wav")
+noise_signal, noise_sr = librosa.load("noise/14113-4-0-0.wav")
 list_noise_signals.append(librosa.resample(noise_signal, noise_sr, sr))
 list_noise_factors.append(0.15)
 
@@ -53,7 +53,15 @@ augmented_signal = au.add_multiple_noise(signal, list_noise_signals=list_noise_s
 loader.save_file(f"outputs/test_multiple_noise.wav", augmented_signal, sr)
 
 
-# External noise
+# Random noise from folder
 augmented_signal = au.add_random_noise(signal, sr, noise_folder="./noise/", min_noise_factor=0.01, max_noise_factor=0.05)
 loader.save_file(f"outputs/test_random_noise.wav", augmented_signal, sr)
+
+# Low pass filter
+augmented_signal = au.low_pass_filter(signal, sr)
+loader.save_file(f"outputs/test_audio_lowpass.wav", augmented_signal, sr)
+
+# High pass filter
+augmented_signal = au.high_pass_filter(signal, sr)
+loader.save_file(f"outputs/test_audio_highpass.wav", augmented_signal, sr)
 

@@ -8,6 +8,8 @@ import torch
 import math
 import os
 from auau.loader import Loader
+from torch_audiomentations import HighPassFilter, LowPassFilter, Compose
+import torchaudio.functional as FAudio
 
 class Augmenter:
     '''This is the docstring for this class'''
@@ -152,4 +154,15 @@ class Augmenter:
         noise_signal = self._check_and_convert_mono(noise_signal)
         noise_factor = random.uniform(min_noise_factor, max_noise_factor)
         return self.add_noise(signal, noise_signal, noise_factor)
+
+    
+    def low_pass_filter(self, signal, sr, cutoff_freq=1000):
+        signal = self._tensor_on_device(signal)
+        signal = self._check_and_convert_mono(signal)
+        return FAudio.lowpass_biquad(signal, sr, cutoff_freq=float(cutoff_freq))
+
+    def high_pass_filter(self, signal, sr, cutoff_freq=1000):
+        signal = self._tensor_on_device(signal)
+        signal = self._check_and_convert_mono(signal)
+        return FAudio.highpass_biquad(signal, sr, cutoff_freq=float(cutoff_freq))
 

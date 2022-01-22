@@ -22,7 +22,7 @@ setup(
         'numpy',
         'soundfile',
         'torch',
-        'audiomentations',
+        #'audiomentations',
         'torch-audiomentations'
     ],
     test_suite = 'tests',

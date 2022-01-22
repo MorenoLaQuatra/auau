@@ -83,6 +83,8 @@ This library is built on top of the following open-source projects:
 * [librosa](https://librosa.org/doc/latest/index.html)
 * [soundfile](https://pysoundfile.readthedocs.io/en/latest/)
 * [numpy](https://numpy.org/)
+* [torchaudio](https://pytorch.org/audio/stable/index.html)
+* [pytorch](https://pytorch.org/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

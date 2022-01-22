@@ -70,7 +70,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-TODO!
+This library is mainly intended for experimenting with audio data augmentation.
+Let's see what happen!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -210,7 +211,7 @@ See the [open issues](https://github.com/MorenoLaQuatra/auau/issues) for a full 
 <!-- CONTRIBUTING -->
 ## Contributing
 
-TODO!
+- **V0.0.2** - This library is unstable and intented just for experimentation purposes.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

@@ -203,7 +203,9 @@ Please propose something you want to see in this library
 
 - [x] Initial release `0.0.1`!
 - [x] Make it work on GPU (if available)
-- [ ] Implementa a real documentation (besides examples)
+- [ ] Additional augmentations (e.g., distortion or voice morphing)
+- [ ] Pipelines
+- [ ] Implement real documentation (besides examples)
 - [ ] Standard support for multichannel audio (mainly stereo)
 
 See the [open issues](https://github.com/MorenoLaQuatra/auau/issues) for a full list of proposed features (and known issues).

@@ -125,6 +125,7 @@ TODO!
 Please propose something you want to see in this library
 
 - [x] Initial release `0.0.1`!
+- [] Standard support for multichannel audio (mainly stereo)
 
 See the [open issues](https://github.com/MorenoLaQuatra/auau/issues) for a full list of proposed features (and known issues).
 

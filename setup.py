@@ -21,6 +21,9 @@ setup(
         'torchaudio',
         'numpy',
         'soundfile',
+        'torch',
+        'audiomentations',
+        'torch-audiomentations'
     ],
     test_suite = 'tests',
     entry_points = {

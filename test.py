@@ -24,7 +24,7 @@ augmented_signal = au.pitch_scale(signal, sampling_rate=sr, num_semitones=num_se
 loader.save_file(f"outputs/test_audio_pitch-{num_semitones}.wav", augmented_signal, sr)
 
 # Random Gain
-augmented_signal = au.random_gain(signal, min_gain=1, max_gain=1.5)
+augmented_signal = au.random_gain(signal, min_gain=1, max_gain=1.1)
 loader.save_file(f"outputs/test_audio_random_gain.wav", augmented_signal, sr)
 
 # Polarity
@@ -33,7 +33,7 @@ loader.save_file(f"outputs/test_audio_invert_polarity.wav", augmented_signal, sr
 
 # External noise
 noise_signal, noise_sr = librosa.load("noise/1.wav")
-noise_signal = librosa.resample(noise_signal, noise_sr, sr)
+au.resample(noise_signal, source_sr = noise_sr, target_sr = sr)
 augmented_signal = au.add_noise(signal, noise_signal, noise_factor=0.25)
 loader.save_file(f"outputs/test_noise.wav", augmented_signal, sr)
 
@@ -51,3 +51,4 @@ list_noise_factors.append(0.15)
 
 augmented_signal = au.add_multiple_noise(signal, list_noise_signals=list_noise_signals, list_noise_factors=list_noise_factors)
 loader.save_file(f"outputs/test_multiple_noise.wav", augmented_signal, sr)
+

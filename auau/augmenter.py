@@ -6,6 +6,8 @@ import copy
 import logging
 import torch
 import math
+import os
+from auau.loader import Loader
 
 class Augmenter:
     '''This is the docstring for this class'''
@@ -16,6 +18,9 @@ class Augmenter:
             self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         else:
             self.device = device
+
+        self.loader = Loader()
+        self.allowed_extensions = ["wav", "mp3", ]
     
     def _convert_to_numpy(self, signal):
         if torch.is_tensor(signal):
@@ -95,7 +100,6 @@ class Augmenter:
         signal = self._tensor_on_device(signal)
         signal = self._check_and_convert_mono(signal)
         gain_rate = torch.FloatTensor(signal.shape).uniform_(min_gain, max_gain)
-        print (gain_rate)
         augmented_signal = signal * gain_rate
         return augmented_signal
 
@@ -139,10 +143,13 @@ class Augmenter:
             augmented_signal = self.add_noise(augmented_signal, noise_signal, list_noise_factors[noise_index])
         return augmented_signal
 
-    def add_random_noise(self, signal, noise_folder, min_noise_factor=0.05, max_noise_factor=0.15):
-        # TODO: list all files in noise_folder, only with allowed extensions (check librosa)
-        # TODO: randomly select one
-        # TODO: add a sample with random noise factor between min and max
-        # TODO: return augmented signal
-        pass
+    def add_random_noise(self, signal, signal_sr, noise_folder, min_noise_factor=0.05, max_noise_factor=0.15):
+        files = librosa.util.find_files(noise_folder, recurse=False)
+        noise_file = random.choice(files)
+        noise_signal, noise_sr = self.loader.load_file(noise_file)
+        noise_signal = self.resample(noise_signal, noise_sr, signal_sr)
+        noise_signal = self._tensor_on_device(noise_signal)
+        noise_signal = self._check_and_convert_mono(noise_signal)
+        noise_factor = random.uniform(min_noise_factor, max_noise_factor)
+        return self.add_noise(signal, noise_signal, noise_factor)
 

@@ -52,3 +52,8 @@ list_noise_factors.append(0.15)
 augmented_signal = au.add_multiple_noise(signal, list_noise_signals=list_noise_signals, list_noise_factors=list_noise_factors)
 loader.save_file(f"outputs/test_multiple_noise.wav", augmented_signal, sr)
 
+
+# External noise
+augmented_signal = au.add_random_noise(signal, sr, noise_folder="./noise/", min_noise_factor=0.01, max_noise_factor=0.05)
+loader.save_file(f"outputs/test_random_noise.wav", augmented_signal, sr)
+

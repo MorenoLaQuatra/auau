@@ -145,8 +145,8 @@ class Augmenter:
             augmented_signal = self.add_noise(augmented_signal, noise_signal, list_noise_factors[noise_index])
         return augmented_signal
 
-    def add_random_noise(self, signal, signal_sr, noise_folder, min_noise_factor=0.05, max_noise_factor=0.15):
-        files = librosa.util.find_files(noise_folder, recurse=False)
+    def add_random_noise(self, signal, signal_sr, noise_folder, traverse_folder=True, min_noise_factor=0.05, max_noise_factor=0.15):
+        files = librosa.util.find_files(noise_folder, recurse=traverse_folder)
         noise_file = random.choice(files)
         noise_signal, noise_sr = self.loader.load_file(noise_file)
         noise_signal = self.resample(noise_signal, noise_sr, signal_sr)

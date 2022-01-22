@@ -94,7 +94,10 @@ This library is built on top of the following open-source projects:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get started using `auau` you must have a python version `>=3.6`
+To get started using `auau` you must have a python version `>=3.6`. Hereafter some considerations:
+- `noise/` folder contains some examples from UrbanSound8K. They can be used as noise signals.
+- `outputs/` folder is just an example containing some augmented audios.
+- **You DO NOT require those folders for running the audio augmentations.**
 
 ### Prerequisites
 
@@ -200,7 +203,8 @@ Please propose something you want to see in this library
 
 - [x] Initial release `0.0.1`!
 - [x] Make it work on GPU (if available)
-- [] Standard support for multichannel audio (mainly stereo)
+- [ ] Implementa a real documentation (besides examples)
+- [ ] Standard support for multichannel audio (mainly stereo)
 
 See the [open issues](https://github.com/MorenoLaQuatra/auau/issues) for a full list of proposed features (and known issues).
 

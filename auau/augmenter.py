@@ -92,8 +92,7 @@ class Augmenter:
         """
         signal = self._tensor_on_device(signal)
         signal = self._check_and_convert_mono(signal)
-        signal = self._array_on_cpu(signal)
-        augmented_signal = librosa.effects.pitch_shift(signal, sampling_rate, num_semitones)
+        augmented_signal = FAudio.pitch_shift(signal, sampling_rate, num_semitones)
         return self._tensor_on_device(augmented_signal)
 
     def random_gain(self, signal, min_gain=1, max_gain=1.2):
@@ -155,7 +154,10 @@ class Augmenter:
         noise_factor = random.uniform(min_noise_factor, max_noise_factor)
         return self.add_noise(signal, noise_signal, noise_factor)
 
-    
+    '''
+    From torchaudio.functional
+    '''
+
     def low_pass_filter(self, signal, sr, cutoff_freq=1000):
         signal = self._tensor_on_device(signal)
         signal = self._check_and_convert_mono(signal)
@@ -165,4 +167,11 @@ class Augmenter:
         signal = self._tensor_on_device(signal)
         signal = self._check_and_convert_mono(signal)
         return FAudio.highpass_biquad(signal, sr, cutoff_freq=float(cutoff_freq))
+
+    def flanger(self, signal, sampling_rate):
+        signal = self._tensor_on_device(signal)
+        signal = self._check_and_convert_mono(signal)
+        signal = torch.unsqueeze(signal, dim=0)
+        augmented_signal = FAudio.flanger(signal, sampling_rate)
+        return augmented_signal[0, :]
 

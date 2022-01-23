@@ -19,7 +19,7 @@ augmented_signal = au.time_stretch(signal, time_stretch_rate=time_stretch_rate)
 loader.save_file(f"outputs/test_audio_timestretch-{time_stretch_rate}.wav", augmented_signal, sr)
 
 # Pitch Scale
-num_semitones = 2
+num_semitones = 5
 augmented_signal = au.pitch_scale(signal, sampling_rate=sr, num_semitones=num_semitones)
 loader.save_file(f"outputs/test_audio_pitch-{num_semitones}.wav", augmented_signal, sr)
 
@@ -64,4 +64,8 @@ loader.save_file(f"outputs/test_audio_lowpass.wav", augmented_signal, sr)
 # High pass filter
 augmented_signal = au.high_pass_filter(signal, sr)
 loader.save_file(f"outputs/test_audio_highpass.wav", augmented_signal, sr)
+
+# High pass filter
+augmented_signal = au.flanger(signal, sr)
+loader.save_file(f"outputs/test_audio_flanger.wav", augmented_signal, sr)
 

@@ -168,10 +168,56 @@ class Augmenter:
         signal = self._check_and_convert_mono(signal)
         return FAudio.highpass_biquad(signal, sr, cutoff_freq=float(cutoff_freq))
 
-    def flanger(self, signal, sampling_rate):
+    def flanger(self, 
+        signal, 
+        sampling_rate, 
+        delay: float = 0.0, 
+        depth: float = 2.0, 
+        regen: float = 0.0, 
+        width: float = 71.0, 
+        speed: float = 0.5, 
+        phase: float = 25.0, 
+        modulation: str = 'sinusoidal', 
+        interpolation: str = 'linear'):
+
         signal = self._tensor_on_device(signal)
         signal = self._check_and_convert_mono(signal)
         signal = torch.unsqueeze(signal, dim=0)
-        augmented_signal = FAudio.flanger(signal, sampling_rate)
+        augmented_signal = FAudio.flanger(signal, 
+            sampling_rate, 
+            delay=delay,
+            depth=depth,
+            regen=regen,
+            width=width,
+            speed=speed,
+            phase=phase,
+            modulation=modulation,
+            interpolation=interpolation
+        )
+        return augmented_signal[0, :]
+
+    def phaser(self,
+        signal, 
+        sampling_rate,
+        gain_in: float = 0.4, 
+        gain_out: float = 0.74, 
+        delay_ms: float = 3.0, 
+        decay: float = 0.4, 
+        mod_speed: float = 0.5, 
+        sinusoidal: bool = True
+        ):
+
+        signal = self._tensor_on_device(signal)
+        signal = self._check_and_convert_mono(signal)
+        signal = torch.unsqueeze(signal, dim=0)
+        augmented_signal = FAudio.phaser(signal, 
+            sampling_rate,
+            gain_in=gain_in,
+            gain_out=gain_out,
+            delay_ms=delay_ms,
+            decay=decay,
+            mod_speed=mod_speed,
+            sinusoidal=sinusoidal
+        )
         return augmented_signal[0, :]
 

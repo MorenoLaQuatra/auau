@@ -65,7 +65,11 @@ loader.save_file(f"outputs/test_audio_lowpass.wav", augmented_signal, sr)
 augmented_signal = au.high_pass_filter(signal, sr)
 loader.save_file(f"outputs/test_audio_highpass.wav", augmented_signal, sr)
 
-# High pass filter
+# Flanger
 augmented_signal = au.flanger(signal, sr)
 loader.save_file(f"outputs/test_audio_flanger.wav", augmented_signal, sr)
+
+# Phase
+augmented_signal = au.phaser(signal, sr)
+loader.save_file(f"outputs/test_audio_phaser.wav", augmented_signal, sr)
 

@@ -23,6 +23,7 @@ class Augmenter:
 
         self.loader = Loader()
         self.allowed_extensions = ["wav", "mp3", ]
+        self.list_augmentations = []
     
     def _convert_to_numpy(self, signal):
         if torch.is_tensor(signal):
@@ -65,6 +66,8 @@ class Augmenter:
             return signal
 
     def resample(self, signal, source_sr, target_sr):
+        """ Resampling using librosa, on CPU
+        """
         signal = self._array_on_cpu(signal)
         signal = self._check_and_convert_mono(signal)
         return librosa.resample(signal, source_sr, target_sr)
@@ -87,12 +90,12 @@ class Augmenter:
         augmented_signal = librosa.effects.time_stretch(signal, time_stretch_rate)
         return self._tensor_on_device(augmented_signal)
 
-    def pitch_scale(self, signal, sampling_rate, num_semitones=2):
+    def pitch_scale(self, signal, sr, num_semitones=2):
         """Pitch scaling implemented with librosa, processing on CPU
         """
         signal = self._tensor_on_device(signal)
         signal = self._check_and_convert_mono(signal)
-        augmented_signal = FAudio.pitch_shift(signal, sampling_rate, num_semitones)
+        augmented_signal = FAudio.pitch_shift(signal, sr, num_semitones)
         return self._tensor_on_device(augmented_signal)
 
     def random_gain(self, signal, min_gain=1, max_gain=1.2):
@@ -144,11 +147,11 @@ class Augmenter:
             augmented_signal = self.add_noise(augmented_signal, noise_signal, list_noise_factors[noise_index])
         return augmented_signal
 
-    def add_random_noise(self, signal, signal_sr, noise_folder, traverse_folder=True, min_noise_factor=0.05, max_noise_factor=0.15):
+    def add_random_noise(self, signal, sr, noise_folder, traverse_folder=True, min_noise_factor=0.05, max_noise_factor=0.15):
         files = librosa.util.find_files(noise_folder, recurse=traverse_folder)
         noise_file = random.choice(files)
         noise_signal, noise_sr = self.loader.load_file(noise_file)
-        noise_signal = self.resample(noise_signal, noise_sr, signal_sr)
+        noise_signal = self.resample(noise_signal, noise_sr, sr)
         noise_signal = self._tensor_on_device(noise_signal)
         noise_signal = self._check_and_convert_mono(noise_signal)
         noise_factor = random.uniform(min_noise_factor, max_noise_factor)
@@ -170,7 +173,7 @@ class Augmenter:
 
     def flanger(self, 
         signal, 
-        sampling_rate, 
+        sr, 
         delay: float = 0.0, 
         depth: float = 2.0, 
         regen: float = 0.0, 
@@ -184,7 +187,7 @@ class Augmenter:
         signal = self._check_and_convert_mono(signal)
         signal = torch.unsqueeze(signal, dim=0)
         augmented_signal = FAudio.flanger(signal, 
-            sampling_rate, 
+            sr, 
             delay=delay,
             depth=depth,
             regen=regen,
@@ -198,7 +201,7 @@ class Augmenter:
 
     def phaser(self,
         signal, 
-        sampling_rate,
+        sr,
         gain_in: float = 0.4, 
         gain_out: float = 0.74, 
         delay_ms: float = 3.0, 
@@ -211,7 +214,7 @@ class Augmenter:
         signal = self._check_and_convert_mono(signal)
         signal = torch.unsqueeze(signal, dim=0)
         augmented_signal = FAudio.phaser(signal, 
-            sampling_rate,
+            sr,
             gain_in=gain_in,
             gain_out=gain_out,
             delay_ms=delay_ms,
@@ -220,4 +223,5 @@ class Augmenter:
             sinusoidal=sinusoidal
         )
         return augmented_signal[0, :]
+
 

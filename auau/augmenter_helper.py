@@ -25,15 +25,11 @@ class AugmenterHelper:
 
     How to remove hardcoded?
     '''
-    
-    # list augmentation is a list of tuples. Each tuple contains as first element the function to apply, as second the probability
-    # list_augmentations = [(low_pass_filter, 0.15), (high_pass_filter, 0.15) ...]
+
     def augment(self, 
         list_dicts: list=[],
         signal_key: str="array",
         sr_key: str="sr"):
-
-        counter = collections.Counter()
         
         list_augmentations = ["LP", "HP", "noise", "noise+HP", "noise+LP", "pitch"]
         list_probabilities = [0.15, 0.15, 0.45, 0.1, 0.1, 0.05]
@@ -58,7 +54,7 @@ class AugmenterHelper:
                 augmented_signal = self.augmenter.add_random_noise(signal, sr, noise_folder=self.noise_folder, max_noise_factor=0.1)
                 augmented_signal = self.augmenter.high_pass_filter(augmented_signal, sr, cutoff_freq=random.randint(800,1000))
             elif c == "pitch":
-                augmented_signal = self.augmenter.pitch_scale(signal, sr)
+                augmented_signal = self.augmenter.pitch_scale(signal, sr, num_semitones=random.randint(-2,2))
             else:
                 logging.ERROR("Augmentation not found, return original signal")
 
@@ -66,18 +62,6 @@ class AugmenterHelper:
             list_dicts[i]["augmentation_type"] = c
 
         return list_dicts
-
-            
-                
-
-
-
-
-        for i in range(100_000):
-            c = np.random.choice(list_augmentations, p=list_probabilities)
-            counter[c] += 1
-
-        print (counter)
 
 
 

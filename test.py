@@ -14,13 +14,13 @@ augmented_signal = au.add_white_noise(signal, noise_factor=0.25)
 loader.save_file(f"outputs/test_audio_noise-{noise_factor}.wav", augmented_signal, sr)
 
 # Time Strech
-time_stretch_rate = 1.4
+time_stretch_rate = 1.1
 augmented_signal = au.time_stretch(signal, time_stretch_rate=time_stretch_rate)
 loader.save_file(f"outputs/test_audio_timestretch-{time_stretch_rate}.wav", augmented_signal, sr)
 
 # Pitch Scale
 num_semitones = 5
-augmented_signal = au.pitch_scale(signal, sampling_rate=sr, num_semitones=num_semitones)
+augmented_signal = au.pitch_scale(signal, sr=sr, num_semitones=num_semitones)
 loader.save_file(f"outputs/test_audio_pitch-{num_semitones}.wav", augmented_signal, sr)
 
 # Random Gain

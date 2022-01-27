@@ -114,7 +114,7 @@ class Augmenter:
         """
         Apply a random, constant gain
         """
-        gain_rate = np.random.uniform(min_gain, max_gain) # constant value, no need to port it to device
+        gain_rate = torch.FloatTensor(signal.shape).uniform_(min_gain, max_gain) # constant value, no need to port it to device
         return self.gain(signal, gain_rate)
 
     def invert_polarity(self, signal):

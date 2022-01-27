@@ -98,14 +98,24 @@ class Augmenter:
         augmented_signal = FAudio.pitch_shift(signal, sr, num_semitones)
         return self._tensor_on_device(augmented_signal)
 
-    def random_gain(self, signal, min_gain=1, max_gain=1.2):
-        """Random gain, processing on device
+    def gain(self, signal, gain):
+        """
+        Multiply signal by gain. 
+        gain can either be a constant value, or a tensor with the same shape as signal
         """
         signal = self._tensor_on_device(signal)
         signal = self._check_and_convert_mono(signal)
-        gain_rate = torch.FloatTensor(signal.shape).uniform_(min_gain, max_gain)
-        augmented_signal = signal * gain_rate
+        if torch.is_tensor(gain):
+            gain = self._move_to_device(gain)
+        augmented_signal = signal * gain
         return augmented_signal
+
+    def random_gain(self, signal, min_gain=1, max_gain=1.2):
+        """
+        Apply a random, constant gain
+        """
+        gain_rate = np.random.uniform(min_gain, max_gain) # constant value, no need to port it to device
+        return self.gain(signal, gain_rate)
 
     def invert_polarity(self, signal):
         """Invert polarity, processing on device

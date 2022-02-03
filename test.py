@@ -23,6 +23,10 @@ num_semitones = 5
 augmented_signal = au.pitch_scale(signal, sr=sr, num_semitones=num_semitones)
 loader.save_file(f"outputs/test_audio_pitch-{num_semitones}.wav", augmented_signal, sr)
 
+# User-provided gain
+augmented_signal = au.gain(signal, 3.14)
+loader.save_file("outputs/test_audio_gain.wav", augmented_signal, sr)
+
 # Random Gain
 augmented_signal = au.random_gain(signal, min_gain=1, max_gain=1.1)
 loader.save_file(f"outputs/test_audio_random_gain.wav", augmented_signal, sr)
